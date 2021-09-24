@@ -1,0 +1,25 @@
+{
+  "name": "strapi-snippets",
+  "displayName": "Strapi Snippets",
+  "description": "",
+  "version": "0.0.1",
+  "publisher": "Abdalslam Aboubakar",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Snippets"
+  ],
+  "contributes": {
+    "snippets": [
+      {
+        "language": "",
+        "path": "./snippets/snippets.code-snippets"
+      },
+      {
+        "language": "javascript",
+        "path": "./snippets/snippets.code-snippets"
+      }
+    ]
+  }
+}
