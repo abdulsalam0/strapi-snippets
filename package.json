@@ -18,7 +18,19 @@
       },
       {
         "language": "javascript",
-        "path": "./snippets/snippets.code-snippets"
+        "path": "./snippets/collectiontypesnippets.code-snippets"
+      },
+      {
+        "language": "javascript",
+        "path": "./snippets/singletypesnippets.code-snippets"
+      },
+      {
+        "language": "json",
+        "path": "./snippets/routes.code-snippets"
+      },
+      {
+        "language": "javascript",
+        "path": "./snippets/policies.code-snippets"
       }
     ]
   }

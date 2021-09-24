@@ -1,0 +1,43 @@
+{
+  "Strapi 3 Single Type Find Controller": {
+    "prefix": "StrapiSingleFindController",
+    "body": [
+      "async find(ctx) {",
+      "\tconst entity = await strapi.services[\"$1\"].find();",
+      "\treturn sanitizeEntity(entity, { model: strapi.models[\"$2\"] });",
+      "},"
+    ],
+    "description": "Basic find method controller from the docs. This method is used to find the single type and return it.",
+    "scope": "typescript,javascript"
+  },
+  "Strapi 3 Single Type Update Controller": {
+    "prefix": "StrapiSingleUpdateController",
+    "body": [
+      "async update(ctx) {",
+      "\tlet entity;",
+      "\n\tif (ctx.is('multipart')) {",
+      "\t\tconst { data, files } = parseMultipartData(ctx);",
+      "\t\tentity = await strapi.services[\"$1\"].createOrUpdate(data, {",
+      "\t\t\tfiles,",
+      "\t\t});",
+      "\t} else {",
+      "\t\tentity = await strapi.services[\"$2\"].createOrUpdate(ctx.request.body);",
+      "\t}",
+      "\treturn sanitizeEntity(entity, { model: strapi.models[\"$3\"] });",
+      "},"
+    ],
+    "description": "Basic update method controller from the docs. This method is used to update the single type.",
+    "scope": "typescript,javascript"
+  },
+  "Strapi 3 Single Type Delete Controller": {
+    "prefix": "StrapiSingleDeleteController",
+    "body": [
+      "async delete(ctx) {",
+      "\tconst entity = await strapi.services[\"$1\"].delete();",
+      "\treturn sanitizeEntity(entity, { model: strapi.models[\"$2\"] });",
+      "},"
+    ],
+    "description": "Basic delete method controller from the docs. This method is used to delete the single type.",
+    "scope": "typescript,javascript"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "Strapi 3 Basic Authentication policy": {
+    "prefix": "StrapiAuthPolicy",
+    "body": [
+      "module.exports = async (ctx, next) => {",
+      "\t// Go to next policy or will reach the controller's action.",
+      "\tif (ctx.state.user) {",
+      "\t\treturn await next();",
+      "\t}",
+      "\t\nctx.unauthorized(`You're not logged in!`);",
+      "};"
+    ]
+  },
+  "Strapi 3 Basic Confirmed User policy": {
+    "prefix": "StrapiConfirmedPolicy",
+    "body": [
+      "module.exports = async (ctx, next) => {",
+      "\t// Go to next policy or will reach the controller's action.",
+      "\tif (ctx.state.user.confirmed) {",
+      "\t\treturn await next();",
+      "\t}",
+      "\t\nctx.unauthorized(`You're not Confirmed user!`);",
+      "};"
+    ]
+  },
+  "Strapi 3 Basic logs policy": {
+    "prefix": "StrapiLogsPolicy",
+    "body": [
+      "module.exports = async (ctx, next) => {",
+      "\n\t// logs the request and goes to the controller",
+      "\tlet entity;",
+      "\tif (ctx.is(\"multipart\")) {",
+      "\t\tconst { data, files } = parseMultipartData(ctx);",
+      "\t\tentity = await strapi.services[\"$1\"].create(",
+      "\t\t\t{ email, role: role.type, action: ctx.method, endpoint: ctx.url },",
+      "\t\t\tdata,",
+      "\t\t\t{",
+      "\t\t\t\tfiles,",
+      "\t\t\t},",
+      "\t\t);",
+      "\t} else {",
+      "\t\t// Add to the logs table",
+      "\t\tentity = await strapi.services[\"$2\"].create(",
+      "\t\t\t{",
+      "\t\t\t\temail,",
+      "\t\t\t\trole: role.type,",
+      "\t\t\t\taction: ctx.method,",
+      "\t\t\t\tendpoint: ctx.url,",
+      "\t\t\t},",
+      "\t\t\tctx.request.body",
+      "\t\t);",
+      "\t\t}",
+      "\n\treturn await next();",
+      "};"
+    ]
+  }
+}

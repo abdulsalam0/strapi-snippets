@@ -1,0 +1,92 @@
+{
+  "Strapi 3 Collection Type Find Controller": {
+    "prefix": "StrapiFindController",
+    "body": [
+      "async find(ctx) {",
+      "\tlet entities;",
+      "\tif (ctx.query._q) {",
+      "\t\tentities = await strapi.services[\"$1\"].search(ctx.query);",
+      "\t} else {",
+      "\t\tentities = await strapi.services[\"$2\"].find(ctx.query);",
+      "\t}",
+      "\n\treturn entities.map(entity => sanitizeEntity(entity, { model: strapi.models[\"$3\"] }));",
+      "},"
+    ],
+    "description": "Basic find method controller from the docs. this method is used to find matching entities from the query",
+    "scope": "typescript,javascript"
+  },
+  "Strapi 3 Collection Type FindOne Controller": {
+    "prefix": "StrapiFindOneController",
+    "body": [
+      "async findOne(ctx) {",
+      "\tconst { id } = ctx.params;",
+      "\n\tconst entity = await strapi.services[\"$1\"].findOne({ id });",
+      "\treturn sanitizeEntity(entity, { model: strapi.models[\"$2\"] });",
+      "},"
+    ],
+    "description": "Basic findOne method controller from the docs. This method is used to find the first matching entity in the collection",
+    "scope": "typescript,javascript"
+  },
+  "Strapi 3 Collection Type Delete Controller": {
+    "prefix": "StrapiDeleteController",
+    "body": [
+      "async delete(ctx) {",
+      "\tconst { id } = ctx.params;",
+      "\n\tconst entity = await strapi.services[\"$1\"].delete({ id });",
+      "\treturn sanitizeEntity(entity, { model: strapi.models[\"$2\"] });",
+      "},"
+    ],
+    "description": "Basic findOne method controller from the docs. This method is used to find the first matching entity in the collection",
+    "scope": "typescript,javascript"
+  },
+  "Strapi 3 Collection Type Count Controller": {
+    "prefix": "StrapiCountController",
+    "body": [
+      "count(ctx) {",
+      "\tif (ctx.query._q) {",
+      "\n\tconst entity = await strapi.services[\"$1\"].countSearch(ctx.query);",
+      "\t}",
+      "\treturn strapi.services[\"$2\"].count(ctx.query);",
+      "},"
+    ],
+    "description": "Basic findOne method controller from the docs. This method is used to find the first matching entity in the collection",
+    "scope": "typescript,javascript"
+  },
+  "Strapi 3 Collection Type Create Controller": {
+    "prefix": "StrapiCreateController",
+    "body": [
+      "async create(ctx) {",
+      "\tlet entity;",
+      "\n\tif (ctx.is('multipart')) {",
+      "\t\tconst { data, files } = parseMultipartData(ctx);",
+      "\t\tentity = await strapi.services[\"$1\"].create(data, { files });",
+      "\t} else {",
+      "\t\tentity = await strapi.services[\"$2\"].create(ctx.request.body);",
+      "\t}",
+      "\treturn sanitizeEntity(entity, { model: strapi.models[\"$3\"] });",
+      "},"
+    ],
+    "description": "Basic create method controller from the docs. This method is used to create a new entity in the collection",
+    "scope": "typescript,javascript"
+  },
+  "Strapi 3 Collection Type Update Controller": {
+    "prefix": "StrapiUpdateController",
+    "body": [
+      "async update(ctx) {",
+      "\tconst { id } = ctx.params;",
+      "\n\tlet entity;",
+      "\tif (ctx.is('multipart')) {",
+      "\t\tconst { data, files } = parseMultipartData(ctx);",
+      "\t\tentity = await strapi.services[\"$1\"].update({ id }, data, {",
+      "\t\t\tfiles,",
+      "\t\t});",
+      "\t} else {",
+      "\t\tentity = await strapi.services[\"$2\"].update({ id }, ctx.request.body);",
+      "\t}",
+      "\treturn sanitizeEntity(entity, { model: strapi.models[\"$3\"] });",
+      "},"
+    ],
+    "description": "Basic update method controller from the docs. This method is used to update the matching entity in the collection",
+    "scope": "typescript,javascript"
+  }
+}
