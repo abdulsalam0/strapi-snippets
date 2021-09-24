@@ -6,7 +6,7 @@
       "\t\"method\": \"${1|GET,POST,DELETE,PUT|}\",",
       "\t\"path\": \"/$2\",",
       "\t\"handler\": \"$3\",",
-      "\t\"config\": {,",
+      "\t\"config\": {",
       "\t\t\"policies\": [$4]",
       "\t}",
       "}"
